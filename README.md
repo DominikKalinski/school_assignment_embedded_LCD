@@ -1,4 +1,4 @@
-##Setup
+## Setup
 För att kompilera krävs att ESP-IDF är installerat.
 För att bygga kommando: idf.py build
 För att flasha        : idf.py flash
@@ -7,7 +7,7 @@ eller allt på en gång : idf.py build flash monitor
 
 För att kunna simulera i wokwi: använd bin filen som genereras med idf.py build.
 
-##Hur det funkar
+## Hur det funkar
 
 Applikationen genererar och visar reklamtext baserat på företagens betalningsnivå. Texten väljs enligt definierade randomiseringsregler.
 
@@ -17,21 +17,21 @@ Skrollande text
 Blinkande text
 Statisk text
 
-##Randomiseringsmetoder
+## Randomiseringsmetoder
 
 Slumpmässigt (Random)
 Baserat på jämna/ojämna minuter
 
 Om texten i statiskt eller blinkande läge överskrider LCD-skärmens visningsbredd delas den upp i segment. Dessa segment visas sekventiellt (första → … → sista) med automatisk växling.
 
-##Minne
+## Minne
 Allt minne sker i stacken. De stora textvariablerna initialiseras och lever på stacken i .data segmentet.
-##I2C-driver
+## I2C-driver
 Jag har skrivit en egen I2C-driver. Genom att skicka bit för bit som styrs av SCL, exempel: SCL 1 betyder läs bit, SCL 0 betyder invänta SCL 1. Vid SCL 0 ändrar man/håller kvar HIGH eller LOW på SDL, om SDL exempelvis är HIGH och SCL går HIGH så sparar LCDn den biten i sitt minne.
-##Scrollande
+## Scrollande
 När det gäller scrollande text så delar jag upp texten ifall den är längre än LCD-display med hjälp av null-terminators. Så t.ex om text > lcd-längd, gå tillbaka tills mellanslag hittat, sätt \0 istället för mellanslag, och sen repetera så många gånger det behövs.
 Sedan vid utskrift så skannar jag bara efter \0 för att veta när man ska bryta och sedan skriva ut nästa stycke.
-##Förbättringar
+## Förbättringar
 Jag har använt mig av magic numbers, tyvärr så det är något jag måste tänka mer på i framtiden, en annan sak är också att vissa variabelnamn var otydliga. Jag använde mig av alldeles för lite variabler/macros speciellt i I2C drivern (lcd-screen.h/c), där kunde jag t.ex ge alla LCD kommandon namn istället för att det ska vara magic numbers/ magic masks.
 
 Jag skulle säkert faila väldigt hårt på ett MISRA test, så jag startar inte ens den! Skulle ta mig säkert en vecka att ha allt korrekt, MINST!
@@ -40,7 +40,7 @@ Om man kollar i ad-displayer.h så kan det tyckas konstigt att jag har en array[
 
 
 
-##Filer
+## Filer
 inlUppgift.c -> mainfilen, härifrån körs setup som också kör application.
 setup.h/c -> Här sätts alla företagsnamn, hur mycket varje företag betalat, vilken reklamtext och hur reklamen ska visas, sedan startar loopen i setup_run.
 
