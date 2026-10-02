@@ -1,3 +1,4 @@
+**Setup
 För att kompilera krävs att ESP-IDF är installerat.
 För att bygga kommando: idf.py build
 För att flasha        : idf.py flash
